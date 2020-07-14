@@ -1,7 +1,7 @@
 package vn.plusplus.database.services;
 
 import vn.plusplus.database.models.LaptopModel;
-
+import vn.plusplus.database.models.Counter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -111,14 +111,32 @@ public class LaptopService {
         queryDatabase("SELECT * FROM laptop ORDER BY sold DESC");
         return null;
     }
+//Acitivity 41
+    public List<Counter> getCounterByMaker() {
+        try {
+            List<Counter> counters = new ArrayList<>();
+            String sql = "SELECT maker, count (*) AS quantity WHERE laptop GROUP BY maker ORDER BY quantity DESC";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Counter counter = new Counter(rs.getString(1), rs.getInt(2));
+                counters.add(counter);
+            }
+            return counters;
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
 
     private List<LaptopModel> queryDatabase(String sql){
-        List<LaptopModel> laptopEntities = new ArrayList<>();
+        List<LaptopModel> laptopModels = new ArrayList<>();
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                LaptopModel laptopEntity = new LaptopModel(
+                LaptopModel laptopModel = new LaptopModel(
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -136,12 +154,12 @@ public class LaptopService {
                         rs.getTimestamp(15),
                         rs.getTimestamp(16)
                 );
-                laptopEntities.add(laptopEntity);
+                laptopModels.add(laptopModel);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return laptopEntities;
+        return laptopModels;
     }
 
 }

@@ -1,6 +1,7 @@
 
 package vn.plusplus.database;
 
+import vn.plusplus.database.models.Counter;
 import vn.plusplus.database.models.LaptopModel;
 import vn.plusplus.database.services.LaptopService;
 
@@ -38,5 +39,6 @@ public class ApplicationLaptop {
         for(LaptopModel entity : result){
             System.out.println(entity.toString());
         }
+        List<Counter> counters = laptopService.getCounterByMaker();
     }
 }
