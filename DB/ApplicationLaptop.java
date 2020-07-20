@@ -40,5 +40,7 @@ public class ApplicationLaptop {
             System.out.println(entity.toString());
         }
         List<Counter> counters = laptopService.getCounterByMaker();
+
+        laptopService.getStatisticByMaker("APPLE");
     }
 }

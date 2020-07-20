@@ -2,6 +2,8 @@ package vn.plusplus.database.services;
 
 import vn.plusplus.database.models.LaptopModel;
 import vn.plusplus.database.models.Counter;
+import vn.plusplus.database.models.Statistic;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,7 +130,23 @@ public class LaptopService {
             return null;
         }
     }
-
+//Activity 42
+    public List<Statistic> getStatisticByMaker(String maker){
+        try {
+            List<Statistic> statistics = new ArrayList<>();
+            String sql = "SELECT SUM(sold) AS `slod`, SUM(price*sold) AS `totalMoney` FROM store_cms_plusplus.laptop WHERE maker = '" + maker + "'";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Statistic statistic = new Statistic(maker, rs.getInt(1), rs.getInt(2));
+                statistics.add(statistic);
+            }
+            return statistics;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
 
     private List<LaptopModel> queryDatabase(String sql){
         List<LaptopModel> laptopModels = new ArrayList<>();
