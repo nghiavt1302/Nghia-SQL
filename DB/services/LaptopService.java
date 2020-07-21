@@ -147,7 +147,24 @@ public class LaptopService {
             return null;
         }
     }
-
+//Activity 51  (em chua viet dc chuc nang test)
+    public void Insert_Laptop_into_DB() {
+        try {
+            Statement stmt = con.createStatement();
+            String sql = "INSERT IGNORE INTO laptop (" +
+                    "namelaptop, " + "url, " + "maker, " + "type, " + "ram, " + "cpu, " + "ssd, " + "hdd, " + "price, " + "card, " + "screen_resolution, " + "screen_size, " + "sold)" + " VALUES('Dell Inspiron 3593-70197459'," +
+                    " 'https://phongvu.vn/may-tinh-xach-tay-laptop-dell-inspiron-15-3593-3593-70197459-i7-1065g7-en-s191100002.html', " + "'Dell', 'Inspiron'," + " \" +\n" + " \"'8GB', 'Intel Core i7-1065G7 ', '256GB', '1TB', '24990000', 'NVIDIA GeForce MX230 2GB GDDR5 ', '1920 x 1080', '15.6', '30')\"; ";
+            stmt.executeUpdate(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+//// Activity52
+//    public void Update_quantity_by_time(){
+//        try{
+//            String sql = ""
+//        }
+//    }
     private List<LaptopModel> queryDatabase(String sql){
         List<LaptopModel> laptopModels = new ArrayList<>();
         try {
