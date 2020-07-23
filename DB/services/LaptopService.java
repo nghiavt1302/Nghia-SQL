@@ -152,19 +152,37 @@ public class LaptopService {
         try {
             Statement stmt = con.createStatement();
             String sql = "INSERT IGNORE INTO laptop (" +
-                    "namelaptop, " + "url, " + "maker, " + "type, " + "ram, " + "cpu, " + "ssd, " + "hdd, " + "price, " + "card, " + "screen_resolution, " + "screen_size, " + "sold)" + " VALUES('Dell Inspiron 3593-70197459'," +
+                    "name, " + "url, " + "maker, " + "type, " + "ram, " + "cpu, " + "ssd, " + "hdd, " + "price, " + "card, " + "screen_resolution, " + "screen_size, " + "sold)" + " VALUES('Dell Inspiron 3593-70197459'," +
                     " 'https://phongvu.vn/may-tinh-xach-tay-laptop-dell-inspiron-15-3593-3593-70197459-i7-1065g7-en-s191100002.html', " + "'Dell', 'Inspiron'," + " \" +\n" + " \"'8GB', 'Intel Core i7-1065G7 ', '256GB', '1TB', '24990000', 'NVIDIA GeForce MX230 2GB GDDR5 ', '1920 x 1080', '15.6', '30')\"; ";
+            stmt.executeUpdate(sql);
+            ResultSet resultSet = stmt.executeQuery("SELECT * FROM laptop WHERE name ='Dell Inspiron 3593-70197459'");
+            List<LaptopModel> laptopModels=new ArrayList<>();
+            while(resultSet.next()){
+                LaptopModel laptopModel= new LaptopModel(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3)
+                        ,resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),
+                        resultSet.getString(8),resultSet.getString(9),resultSet.getFloat(10),resultSet.getString(11),
+                        resultSet.getString(12),resultSet.getString(13),resultSet.getInt(14),null,null);
+                laptopModels.add(laptopModel);
+
+                for(LaptopModel laptopModel1 : laptopModels){
+                    System.out.println("Da tim thay " + laptopModel1.toString() + "trong CSDL");
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+// Activity52
+    public void Update_quantity_by_time(int so_luong_tang_them){
+        try{
+            String sql = "UPDATE laptop SET sold=sold+" + so_luong_tang_them + "WHERE maker =''Dell AND type ='Dell Inspiron'";
+            Statement stmt = con.createStatement();
             stmt.executeUpdate(sql);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-//// Activity52
-//    public void Update_quantity_by_time(){
-//        try{
-//            String sql = ""
-//        }
-//    }
+
     private List<LaptopModel> queryDatabase(String sql){
         List<LaptopModel> laptopModels = new ArrayList<>();
         try {
