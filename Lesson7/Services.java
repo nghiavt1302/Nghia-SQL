@@ -37,17 +37,17 @@ public class Services {
             System.out.println(danh_sach_xe.get(i));
         }
     }
-//Act 7.2
-    public void liet_ke_thong_tin_NCC(){
-        List<Thong_tin_NCC> thong_tin_nccs = new ArrayList<>();
-        try{
-            String sql ="";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+////Act 7.2
+//    public void liet_ke_thong_tin_NCC(){
+//        List<Thong_tin_NCC> thong_tin_nccs = new ArrayList<>();
+//        try{
+//            String sql ="";
+//            Statement statement = connection.createStatement();
+//            ResultSet resultSet = statement.executeQuery(sql);
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
 //Act 7.5
     public void Liet_ke_hang_xe(){
         List<String> hang_xe =new ArrayList<>();
